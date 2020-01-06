@@ -1,0 +1,31 @@
+# target指定に3.4以上が要る
+# https://docs.docker.com/compose/compose-file/#target
+version: '3.7'
+
+services:
+  web:
+    build:
+        context: ./web
+        dockerfile: Dockerfile
+        target: dev
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - ./web:/todo_app
+  db:
+    build:
+        context: ./db
+        dockerfile: Dockerfile
+        target: dev
+    environment:
+      - MYSQL_ROOT_PASSWORD=RootP
+      - MYSQL_DATABASE=todo
+      - MYSQL_USER=todo
+      - MYSQL_PASSWORD=Todo-Todo!
+    # デバッグ用
+    ports:
+      - "3306:3306"
+  mail:
+    image: mailhog/mailhog
+    ports:
+      # Web UI
+      - "8025:8025"
