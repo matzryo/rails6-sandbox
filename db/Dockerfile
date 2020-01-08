@@ -1,4 +1,4 @@
-FROM mariadb:10.2 as base
+FROM mysql:8 as base
 
 # mysqlクライアントで日本語を入力/表示可能にする
 RUN apt-get update && \
@@ -7,7 +7,7 @@ RUN apt-get update && \
     echo "ja_JP.UTF-8 UTF-8" > /etc/locale.gen && \
     locale-gen ja_JP.UTF-8
 ENV LC_ALL ja_JP.UTF-8
-COPY ./charset.cnf /etc/mysql/conf.d/
+COPY ./authentication.cnf ./charset.cnf /etc/mysql/conf.d/
 # タイムゾーンを設定
 RUN echo "Asia/Tokyo" > /etc/timezone && dpkg-reconfigure --frontend noninteractive tzdata
 

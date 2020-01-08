@@ -17,10 +17,7 @@ services:
         dockerfile: Dockerfile
         target: dev
     environment:
-      - MYSQL_ROOT_PASSWORD=RootP
-      - MYSQL_DATABASE=todo
-      - MYSQL_USER=todo
-      - MYSQL_PASSWORD=Todo-Todo!
+      - MYSQL_ROOT_PASSWORD=Todo-Todo!
     # デバッグ用
     ports:
       - "3306:3306"

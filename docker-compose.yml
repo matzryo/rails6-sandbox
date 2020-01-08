@@ -8,4 +8,4 @@ services:
       - db
   db:
     volumes:
-      - ./tmp/db:/var/lib/postgresql/data
+      - ./volumes/db-data:/var/lib/mysql
